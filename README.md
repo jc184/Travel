@@ -1,5 +1,5 @@
 # Travel
-My version of the application featured in Packt Publishing's ASP.NET Core and Vue.js.
+My version of the application featured in Packt Publishing's ASP.NET Core and Vue.js, by Devlin Basilan Duldulao.
 It is a .NET Core 5.0 Web API project with a Vue front end and numerous advanced features.
 
 To run this application you will not need to install any database software as it uses an embedded Sqlite3 database.
