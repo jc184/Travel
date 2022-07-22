@@ -1,18 +1,21 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using Travel.Application;
-using Travel.WebApi.Filters;
-using Travel.Data;
-using Travel.Shared;
-using Travel.WebApi.Helpers;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using System.Collections.Generic;
+using Travel.Application;
+using Travel.Data;
+using Travel.Identity;
+using Travel.Identity.Helpers;
+using Travel.Shared;
+using Travel.WebApi.Filters;
+using Travel.WebApi.Helpers;
 
 namespace Travel.WebApi
 {
@@ -31,11 +34,10 @@ namespace Travel.WebApi
             services.AddApplication();
             services.AddInfrastructureData();
             services.AddInfrastructureShared(Configuration);
+            services.AddInfrastructureIdentity(Configuration);
 
             services.AddHttpContextAccessor();
-
             services.AddControllers();
-
             services.AddControllersWithViews(options =>
                 options.Filters.Add(new ApiExceptionFilter()));
             services.Configure<ApiBehaviorOptions>(options =>
@@ -45,9 +47,30 @@ namespace Travel.WebApi
             services.AddSwaggerGen(c =>
             {
                 c.OperationFilter<SwaggerDefaultValues>();
-            });
 
-            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme.",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        }, new List<string>()
+                    }
+                });
+            });
 
             services.AddApiVersioning(config =>
             {
@@ -59,9 +82,9 @@ namespace Travel.WebApi
             services.AddVersionedApiExplorer(options =>
             {
                 options.GroupNameFormat = "'v'VVV";
-                options.SubstituteApiVersionInUrl = true;
             });
 
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,7 +106,11 @@ namespace Travel.WebApi
 
             app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseMiddleware<JwtMiddleware>();
+
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
