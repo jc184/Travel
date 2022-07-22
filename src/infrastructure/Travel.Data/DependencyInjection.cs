@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Travel.Application.Common.Interfaces;
 using Travel.Data.Contexts;
@@ -9,7 +10,6 @@ namespace Travel.Data
     {
         public static IServiceCollection AddInfrastructureData(this IServiceCollection services)
         {
-
 
             services.AddDbContext<ApplicationDbContext>(options => options
               .UseSqlite("Data Source=TravelTourDatabase.sqlite3"));

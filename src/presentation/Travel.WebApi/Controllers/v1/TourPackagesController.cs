@@ -5,7 +5,7 @@ using Travel.Application.TourPackages.DeleteTourPackage;
 using Travel.Application.TourPackages.UpdateTourPackage;
 using Travel.Application.TourPackages.UpdateTourPackageDetail;
 
-namespace Travel.WebApi.Controllers
+namespace Travel.WebApi.Controllers.v1
 {
     [ApiController]
     [Route("api/[controller]")]
