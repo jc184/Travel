@@ -22,7 +22,7 @@ namespace Travel.Identity.Services
                 Id = 1,
                 FirstName = "james",
                 LastName = "chalmers",
-                Username = "jc184",
+                Email = "james.chalmers184@gmail.com",
                 Password = "Pass123!"
             }
         };
@@ -32,7 +32,7 @@ namespace Travel.Identity.Services
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)
         {
-            var user = _users.SingleOrDefault(u => u.Username == model.Username && u.Password == model.Password);
+            var user = _users.SingleOrDefault(u => u.Email == model.Email && u.Password == model.Password);
 
             if (user == null)
                 return null;
@@ -50,7 +50,7 @@ namespace Travel.Identity.Services
             byte[] key = Encoding.ASCII.GetBytes(_authSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+                Subject = new ClaimsIdentity(new[] { new Claim("sub", user.Id.ToString()), new Claim("email", user.Email) }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

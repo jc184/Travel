@@ -1,7 +1,4 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Travel.Application.Common.Mappings;
 using Travel.Domain.Entities;
 
@@ -15,13 +12,17 @@ namespace Travel.Application.Dtos.Tour
         public int Duration { get; set; }
         public bool InstantConfirmation { get; set; }
         public int Currency { get; set; }
+        public string WhatToExpect { get; set; }
+        public float Price { get; set; }
+        public string MapLocation { get; set; }
+
         public void Mapping(Profile profile)
         {
             profile.CreateMap<TourPackage, TourPackageDto>()
-              .ForMember(d =>
-                d.Currency, opt =>
-                opt.MapFrom(s =>
-                  (int)s.Currency));
+              .ForMember(tpDto =>
+                tpDto.Currency, opt =>
+                opt.MapFrom(tp =>
+                  (int)tp.Currency));
         }
     }
 }
