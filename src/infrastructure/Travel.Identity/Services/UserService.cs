@@ -20,9 +20,9 @@ namespace Travel.Identity.Services
             new User
             {
                 Id = 1,
-                FirstName = "Yourname",
-                LastName = "Yoursurname",
-                Username = "yoursuperhero",
+                FirstName = "james",
+                LastName = "chalmers",
+                Username = "jc184",
                 Password = "Pass123!"
             }
         };
