@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Travel.Application.Common.Behaviours
 {
-    public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
         private readonly ILogger<TRequest> _logger;
 

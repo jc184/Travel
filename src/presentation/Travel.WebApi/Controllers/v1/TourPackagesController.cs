@@ -7,8 +7,6 @@ using Travel.Application.TourPackages.UpdateTourPackageDetail;
 
 namespace Travel.WebApi.Controllers.v1
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class TourPackagesController : ApiController
     {
         [HttpPost]
