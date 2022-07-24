@@ -28,9 +28,9 @@ namespace Travel.WebApi.Helpers
                 Description = "Web Service for Travel Tour.",
                 Contact = new OpenApiContact
                 {
-                    Name = "IT Department",
-                    Email = "developer@traveltour.xyz",
-                    Url = new Uri("https://traveltour.xyz/support")
+                    Name = "James Chalmers",
+                    Email = "james.chalmers184@gmail.com",
+                    Url = new Uri("https://www.linkedin.com/in/james-chalmers-a47a85a6/")
                 }
             };
 
