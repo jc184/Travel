@@ -24,6 +24,21 @@ export async function getTourListsAction({ commit }) {
 }
 
 // asynchronous action using Axios
+export async function removeTourListAction({ commit }, payload) {
+  commit(types.LOADING_TOUR, true);
+
+  try {
+    await deleteTourListAxios(payload);
+    commit(types.REMOVE_TOUR_LIST, payload);
+  } catch (e) {
+    alert(e);
+    console.log(e);
+  }
+
+  commit(types.LOADING_TOUR, false);
+}
+
+// asynchronous action using Axios
 export async function addTourListAction({ commit }, payload) {
   commit(types.LOADING_TOUR, true);
 
@@ -43,21 +58,6 @@ export async function addTourListAction({ commit }, payload) {
 // non-asynchronous action
 export function getPackagesOfSelectedCityAction({ commit }, payload) {
   commit(types.GET_PACKAGES_OF_SELECTED_CITY, payload);
-}
-
-// asynchronous action using Axios
-export async function removeTourListAction({ commit }, payload) {
-  commit(types.LOADING_TOUR, true);
-
-  try {
-    await deleteTourListAxios(payload);
-    commit(types.REMOVE_TOUR_LIST, payload);
-  } catch (e) {
-    alert(e);
-    console.log(e);
-  }
-
-  commit(types.LOADING_TOUR, false);
 }
 
 // asynchronous action using Axios
