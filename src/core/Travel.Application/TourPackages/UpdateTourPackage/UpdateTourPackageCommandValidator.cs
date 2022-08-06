@@ -3,8 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using Travel.Application.Common.Interfaces;
+using Travel.Application.TourPackages.UpdateTourPackage;
 
-namespace Travel.Application.TourPackages.UpdateTourPackage
+namespace Travel.Application.TourPackages.Commands.UpdateTourPackage
 {
     public class UpdateTourPackageCommandValidator : AbstractValidator<UpdateTourPackageCommand>
     {
@@ -16,8 +17,7 @@ namespace Travel.Application.TourPackages.UpdateTourPackage
 
             RuleFor(v => v.Name)
               .NotEmpty().WithMessage("Name is required.")
-              .MaximumLength(200).WithMessage("Name must not exceed 200 characters.")
-              .MustAsync(BeUniqueName).WithMessage("The specified name already exists.");
+              .MaximumLength(200).WithMessage("Name must not exceed 200 characters.");
         }
 
         public async Task<bool> BeUniqueName(string name, CancellationToken cancellationToken)

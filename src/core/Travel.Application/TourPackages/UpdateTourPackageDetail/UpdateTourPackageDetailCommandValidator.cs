@@ -3,8 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using Travel.Application.Common.Interfaces;
+using Travel.Application.TourPackages.UpdateTourPackageDetail;
 
-namespace Travel.Application.TourPackages.UpdateTourPackageDetail
+namespace Travel.Application.TourPackages.Commands.UpdateTourPackageDetail
 {
     public class UpdateTourPackageDetailCommandValidator : AbstractValidator<UpdateTourPackageDetailCommand>
     {
