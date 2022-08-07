@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Travel.Application.Dtos.Tour;
+using Travel.Application.TourPackages.Commands.UpdateTourPackageDetail;
 using Travel.Application.TourPackages.CreateTourPackage;
 using Travel.Application.TourPackages.DeleteTourPackage;
 using Travel.Application.TourPackages.Queries;
 using Travel.Application.TourPackages.UpdateTourPackage;
-using Travel.Application.TourPackages.UpdateTourPackageDetail;
 
 namespace Travel.WebApi.Controllers.v1
 {
@@ -36,7 +36,7 @@ namespace Travel.WebApi.Controllers.v1
         }
 
         [HttpPut("[action]")]
-        public async Task<ActionResult> UpdateItemDetails(int id, UpdateTourPackageDetailCommand command)
+        public async Task<ActionResult> UpdatePackageDetails(int id, UpdateTourPackageDetailCommand command)
         {
             if (id != command.Id)
                 return BadRequest();

@@ -6,7 +6,7 @@ using Travel.Application.Common.Interfaces;
 using Travel.Domain.Entities;
 using Travel.Domain.Enums;
 
-namespace Travel.Application.TourPackages.UpdateTourPackageDetail
+namespace Travel.Application.TourPackages.Commands.UpdateTourPackageDetail
 {
     public class UpdateTourPackageDetailCommand : IRequest
     {
