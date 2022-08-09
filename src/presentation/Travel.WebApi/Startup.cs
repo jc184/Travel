@@ -125,9 +125,9 @@ namespace Travel.WebApi
 
                 if (env.IsDevelopment())
                 {
-                    spa.Options.StartupTimeout = new TimeSpan(days: 0, hours: 0, minutes: 1, seconds: 30);
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
-                    //spa.UseVueCli(npmScript: "serve");
+                    //spa.Options.StartupTimeout = new TimeSpan(days: 0, hours: 0, minutes: 1, seconds: 30);
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                    spa.UseVueCli(npmScript: "serve");
                 }
             });
         }

@@ -89,32 +89,34 @@ export default {
     bodyRequest: {
       type: Object,
       required: true,
-      default: {
-        listId: 0,
-        name: "missing name",
-        whatToExpect: "missing what to expect",
-        mapLocation: "missing map location",
-        price: 0,
-        duration: 0,
-        instantConfirmation: true
-      }
-    }
+      default: function () {
+        return {
+          listId: 0,
+          name: "missing name",
+          whatToExpect: "missing what to expect",
+          mapLocation: "missing map location",
+          price: 0,
+          duration: 0,
+          instantConfirmation: true,
+        };
+      },
+    },
+
+    methods: {
+      ...mapActions("tourModule", ["updateTourPackageAction"]),
+
+      onSubmit() {
+        this.updateTourPackageAction(this.bodyRequest); // fyi, you might not see the results right away because of the cache.
+      },
+    },
+
+    data: () => ({
+      dialog: false,
+      currencies: ["USD", "NOK"],
+      currencyValues: [0, 1],
+      durations: [1, 2, 3, 4, 5, 6, 7, 8],
+      durationValue: 1,
+    }),
   },
-
-  methods: {
-    ...mapActions("tourModule", ["updateTourPackageAction"]),
-
-    onSubmit() {
-      this.updateTourPackageAction(this.bodyRequest); // fyi, you might not see the results right away because of the cache.
-    }
-  },
-
-  data: () => ({
-    dialog: false,
-    currencies: ["USD", "NOK"],
-    currencyValues: [0, 1],
-    durations: [1, 2, 3, 4, 5, 6, 7, 8],
-    durationValue: 1
-  })
 };
 </script>
