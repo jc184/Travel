@@ -34,30 +34,41 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "TourListsCard",
+
+  props: {
+    handleShowPackages: Function
+  },
+
   computed: {
     ...mapGetters("tourModule", {
       lists: "lists",
-      loading: "loading",
-    }),
+      loading: "loading"
+    })
   },
+
   methods: {
     ...mapActions("tourModule", [
       "removeTourListAction",
-      "getPackagesOfSelectedCityAction",
+      "getPackagesOfSelectedCityAction"
     ]),
+
     removeTourList(listId) {
       const confirmed = confirm(
         "You sure you want to delete this tour list? This will also delete the packages permanently"
       );
+
       if (!confirmed) return;
+
       this.removeTourListAction(listId);
     },
+
     addToPackages(packages, listId) {
       this.getPackagesOfSelectedCityAction(packages);
       this.$emit("handleShowPackages", true, listId);
-    },
-  },
+    }
+  }
 };
 </script>

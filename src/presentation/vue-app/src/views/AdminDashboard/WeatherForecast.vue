@@ -60,22 +60,25 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "WeatherForecast",
+
   async mounted() {
     this.loading = true;
     dayjs.extend(relativeTime);
     await this.fetchWeatherForecast(this.selectedCity);
     this.loading = false;
     await this.getTourListsAction();
-    this.cities = this.lists.map((pl) => pl.city);
+    this.cities = this.lists.map(pl => pl.city);
   },
+
   data() {
     return {
       weatherForecast: [],
       cities: [],
       selectedCity: "Oslo",
-      loading: false,
+      loading: false
     };
   },
+
   methods: {
     ...mapActions("tourModule", ["getTourListsAction"]),
     async fetchWeatherForecast(city = "Oslo") {
@@ -83,10 +86,11 @@ export default {
       try {
         const { data } = await getWeatherForecastV2Axios(city);
         console.log(data);
-        this.weatherForecast = data?.map((w) => {
+        this.weatherForecast = data?.map(w => {
           const formattedData = { ...w };
           let date = w.date;
           formattedData.date = dayjs(date).fromNow();
+
           return formattedData;
         });
       } catch (e) {
@@ -95,6 +99,7 @@ export default {
         this.loading = false;
       }
     },
+
     getColor(summary) {
       switch (summary) {
         case "Freezing":
@@ -120,13 +125,13 @@ export default {
         default:
           return "grey";
       }
-    },
+    }
   },
 
   computed: {
     ...mapGetters("tourModule", {
-      lists: "lists",
-    }),
-  },
+      lists: "lists"
+    })
+  }
 };
 </script>

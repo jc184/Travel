@@ -20,29 +20,34 @@ import TourListsCard from "@/components/TourListsCard";
 import AddTourListForm from "@/components/AddTourListForm";
 import TourPackagesCard from "@/components/TourPackagesCard";
 import AddTourPackageForm from "@/components/AddTourPackageForm";
+
 export default {
   name: "DefaultContent",
+
   components: {
     TourListsCard,
     AddTourListForm,
     TourPackagesCard,
-    AddTourPackageForm,
+    AddTourPackageForm
   },
+
   methods: {
     ...mapActions("tourModule", ["getTourListsAction"]),
     handleShowPackages(show, listId) {
       this.showPackages = show;
       this.tourListId = listId;
-    },
+    }
   },
+
   data: () => ({
     showPackages: false,
-    tourListId: 0,
+    tourListId: 0
   }),
+
   mounted() {
     this.getTourListsAction();
     this.showPackages = false;
-  },
+  }
 };
 </script>
 

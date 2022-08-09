@@ -76,19 +76,23 @@
 <script>
 import { getCountryList } from "@/helpers/collections";
 import { mapActions } from "vuex";
+
 export default {
   name: "AddTourListForm",
+
   data: () => ({
     bodyRequest: {
       city: "",
       country: "",
-      about: "",
+      about: ""
     },
+
     dialog: false,
-    countryList: getCountryList(),
+    countryList: getCountryList()
   }),
+
   methods: {
-    ...mapActions("tourModule", ["addTourListAction"]),
-  },
+    ...mapActions("tourModule", ["addTourListAction"])
+  }
 };
 </script>
